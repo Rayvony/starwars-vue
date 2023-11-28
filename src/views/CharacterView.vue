@@ -9,7 +9,9 @@
           <h3>{{ cardData.name }}</h3>
         <div class="cardButtons">
           <span @click="removeCharacter(cardData.id)" class="material-symbols-rounded">delete</span>
-          <span @click="handleFavorite(cardData)" class="material-symbols-rounded">favorite</span>
+          <span @click="handleFavorite(cardData)" :class="{ 'material-symbols-rounded': true, 'favorite-icon': isFavorite(cardData.id) }">
+            favorite
+          </span>
         </div>
       </CardComponent>
     </div>
@@ -25,7 +27,7 @@ const store = useStore();
 
 const handleSearchSuccess = (searchData) => {
   if (isDuplicate(searchData)) return alert('Already added!');
-  commit('addCharacter', searchData); 
+  store.commit('addCharacter', searchData); 
 };
 
 const isDuplicate = (searchData) => {
@@ -38,16 +40,19 @@ const removeCharacter = (id) => {
 };
 
 const handleFavorite = (cardData) => {
-  const favorites = store.getters.getAllFavorites;
-  const isFavorite = favorites.some(favorite => favorite.id === cardData.id);
-
-  if (isFavorite) {
+  
+  const favorite = isFavorite(cardData.id);
+  if (favorite) {
     store.commit('removeFavorite', cardData.id);
   } else {
     store.commit('addFavorite', cardData);
   }
 };
 
+const isFavorite = (id) => {
+  const favorites = store.getters.getAllFavorites;
+  return favorites.some(favorite => favorite.id === id);
+};
 </script>
 
 <style>
@@ -73,6 +78,10 @@ const handleFavorite = (cardData) => {
 
 .cardButtons .material-symbols-rounded:hover{
   transform: scale(1.2);
+  color: red;
+}
+
+.favorite-icon {
   color: red;
 }
 
