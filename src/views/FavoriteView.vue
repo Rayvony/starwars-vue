@@ -25,5 +25,4 @@ const removeFavorite = (id) => {
 </script>
 
 <style>
-/* Estilos para tu componente FavoriteView */
 </style>

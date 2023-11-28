@@ -1,7 +1,7 @@
 <template>
   <SearchBar type="character" @search-success="handleSearchSuccess"/>
   <div class="cardContainer">
-    <div v-for="cardData in getAllCharacters" :key="cardData.id">
+    <div v-for="cardData in store.getters.getAllCharacters" :key="cardData.id">
       <CardComponent>
         <router-link :to="`/details/character/${cardData.id}`">
           <img :src="cardData.img" :alt="cardData.name" />
@@ -21,12 +21,11 @@ import CardComponent from '@/components/CardComponent.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import { useStore } from 'vuex';
 
-const { getAllCharacters, getAllFavorites} = useStore().getters;
-const { commit } = useStore();
+const store = useStore();
 
 const handleSearchSuccess = (searchData) => {
   if (isDuplicate(searchData)) return alert('Already added!');
-  store.commit('addCharacter', searchData); 
+  commit('addCharacter', searchData); 
 };
 
 const isDuplicate = (searchData) => {
@@ -35,17 +34,17 @@ const isDuplicate = (searchData) => {
 };
 
 const removeCharacter = (id) => {
-  commit('removeCharacter', id );
+  store.commit('removeCharacter', id );
 };
 
 const handleFavorite = (cardData) => {
-  const favorites = getAllFavorites;
+  const favorites = store.getters.getAllFavorites;
   const isFavorite = favorites.some(favorite => favorite.id === cardData.id);
 
   if (isFavorite) {
-    commit('removeFavorite', cardData.id);
+    store.commit('removeFavorite', cardData.id);
   } else {
-    commit('addFavorite', cardData);
+    store.commit('addFavorite', cardData);
   }
 };
 
