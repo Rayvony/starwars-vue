@@ -15,16 +15,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: white;
 }
-
+body{
+  background-color: black;
+}
 nav {
   padding: 30px;
 }
 
 nav a {
   font-weight: bold;
-  color: black;
+  color: white;
   margin-right: 20px ;
   text-decoration: none;
 }
@@ -32,7 +34,7 @@ nav a {
 nav a.router-link-exact-active {
   padding: 10px;
   border-radius: 4px;
-  background-color: black;
-  color: yellow;
+  background-color: yellow;
+  color: black;
 }
 </style>

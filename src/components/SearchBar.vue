@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input type="text" :placeholder="`Search for a ${type}`" v-model="searchInput">
+        <input type="text" :placeholder="`Search for a ${type}`" v-model="searchInput" @keyup.enter="search">
         <button @click="search">Search</button>
     </div>
 </template>
@@ -13,25 +13,32 @@ const props = defineProps({
     type: String
 });
 
+const emit = defineEmits(['SearchSuccess']);
+
 let searchInput = ref('');
 
 const search = async () => {
-    switch (type) {
+    let searchData;
+    switch (props.type) {
         case 'character':
-            const character = await getCharacterById(searchInput.value);
-            console.log(character);     
+            searchData = await getCharacterById(searchInput.value);
+            console.log(searchData);
             break;
         
         case 'starship':
-            const starship = await getShipById(searchInput.value);
-            console.log(starship);
+            searchData = await getShipById(searchInput.value);
+            console.log(searchData);
             break;
         
         case 'planet':
-            const planet = await getPlanetById(searchInput.value);
-            console.log(planet);
+            searchData = await getPlanetById(searchInput.value);
+            console.log(searchData);
     default:
         break;
+    }
+    
+    if (searchData) {
+        emit('SearchSuccess', searchData);
     }
 }
 
