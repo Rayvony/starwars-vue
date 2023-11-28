@@ -14,9 +14,15 @@ const card = {
 
 <style>
 .card img {
+  filter: grayscale(100%);
   width: 200px;
   height: auto;
   border-radius: 5px;
+}
+
+.card img:hover {
+  filter: grayscale(0%);
+  cursor: pointer;
 }
 
 .card{
@@ -34,7 +40,6 @@ const card = {
 
 .card:hover{
   transform: scale(1.05);
-  opacity: 0.8;
 }
 
 a{
