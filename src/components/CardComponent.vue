@@ -30,7 +30,6 @@ const card = {
   background-color: yellow;
   border-radius: 5px;
   transition: all 0.05s;
-  cursor: pointer;
 }
 
 .card h3{

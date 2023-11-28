@@ -78,7 +78,7 @@ const isFavorite = (id) => {
 
 .cardButtons .material-symbols-rounded:hover{
   transform: scale(1.2);
-  color: red;
+  cursor:pointer
 }
 
 .favorite-icon {
