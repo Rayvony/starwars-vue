@@ -7,13 +7,9 @@
 </template>
 
 <script setup>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 
-// const HomeView = {
-//   name: 'HomeView',
-//   components: {
-//     HelloWorld
-//   }
-// }
+const HomeView = {
+  name: 'HomeView',
+  components: {}
+}
 </script>

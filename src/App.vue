@@ -1,10 +1,10 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link>
-    <router-link to="/characters">Characters</router-link>
-    <router-link to="/ships">Ships</router-link>
-    <router-link to="/planets">Planets</router-link>
-    <router-link to="/favorites">Favorites</router-link>
+    <router-link :to="{ name: 'characters'}">Characters</router-link>
+    <router-link :to="{ name: 'starships'}">Starships</router-link>
+    <router-link :to="{ name: 'planets'}">Planets</router-link>
+    <router-link :to="{ name: 'favorites'}">Favorites</router-link>
   </nav>
   <router-view/>
 </template>
@@ -24,10 +24,15 @@ nav {
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: black;
+  margin-right: 20px ;
+  text-decoration: none;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: black;
+  color: yellow;
 }
 </style>
