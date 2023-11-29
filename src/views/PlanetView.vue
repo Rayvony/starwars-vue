@@ -37,8 +37,8 @@ const handleSearchSuccess = (searchData) => {
 };
 
 const isDuplicate = (searchData) => {
-  const characters = store.getters.getAllCharacters;
-  return characters.some(item => item.id === searchData.id);
+  const characters = store.getters.getAllPlanets;
+  return characters.some(item => item.originalId === searchData.originalId);
 };
 
 const removeCharacter = (id) => {
