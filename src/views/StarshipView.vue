@@ -4,7 +4,7 @@
     <div v-for="cardData in store.getters.getAllStarships" :key="cardData.id">
       <CardComponent>
       <div class="imgcontainer">
-        <router-link :to="`/details/starship/${cardData.id}`">
+        <router-link @click="handleDetail" :to="`/details/starship/${cardData.originalId}`">
           <img :src="cardData.img" :alt="cardData.name" />
         </router-link>
       </div>
@@ -54,6 +54,10 @@ const handleFavorite = (cardData) => {
 const isFavorite = (id) => {
   const favorites = store.getters.getAllFavorites;
   return favorites.some(favorite => favorite.id === id);
+};
+
+const handleDetail = (cardData) => {
+  emit('detailSuccess', cardData);
 };
 </script>
 

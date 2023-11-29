@@ -3,7 +3,7 @@
   <div class="cardContainer">
     <div v-for="cardData in store.getters.getAllCharacters" :key="cardData.id">
       <CardComponent>
-        <router-link :to="`/details/character/${cardData.id}`">
+        <router-link @click="handleDetail" :to="`/details/character/${cardData.originalId}`">
           <img :src="cardData.img" :alt="cardData.name" />
         </router-link>
           <h3>{{ cardData.name }}</h3>
@@ -24,6 +24,7 @@ import SearchBar from '@/components/SearchBar.vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
+const emit = defineEmits(['detailSuccess']);
 
 const handleSearchSuccess = (searchData) => {
   if (isDuplicate(searchData)) return alert('Already added!');
@@ -52,6 +53,10 @@ const handleFavorite = (cardData) => {
 const isFavorite = (id) => {
   const favorites = store.getters.getAllFavorites;
   return favorites.some(favorite => favorite.id === id);
+};
+
+const handleDetail = (cardData) => {
+  emit('detailSuccess', cardData);
 };
 </script>
 

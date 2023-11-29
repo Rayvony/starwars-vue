@@ -22,17 +22,17 @@ const search = async () => {
     switch (props.type) {
         case 'character':
             searchData = await getCharacterById(searchInput.value);
-            console.log(searchData);
+            
             break;
         
         case 'starship':
             searchData = await getShipById(searchInput.value);
-            console.log(searchData);
+            
             break;
         
         case 'planet':
             searchData = await getPlanetById(searchInput.value);
-            console.log(searchData);
+            
     default:
         break;
     }

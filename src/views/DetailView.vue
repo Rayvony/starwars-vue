@@ -1,7 +1,24 @@
 <template>
-  <div class="home">
-    <h1>Home</h1>
-    <p>Welcome to the Star Wars API!</p>
-    <p>Use the links above to navigate to the different sections of the site.</p>
+  <div @detailSuccess="handleDetailSuccess" class="detail">
+    <h3>{{ detail.name }}</h3>
+    <img :src="detail.img" :alt="detail.name">
   </div>
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+
+const detail = ref({
+  name: '',
+  img: ''
+});
+
+const handleDetailSuccess = (cardData) => {
+    detail.value = cardData;
+};
+
+onMounted(handleDetailSuccess(cardData))
+</script>
+
+<style scoped>
+</style>

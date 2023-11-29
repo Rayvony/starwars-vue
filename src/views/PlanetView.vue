@@ -4,14 +4,10 @@
     <div v-for="cardData in store.getters.getAllPlanets" :key="cardData.id">
       <CardComponent>
         <div class="imgcontainer">
-        <router-link :to="`/details/planet/${cardData.id}`">
+        <router-link @click="handleDetail" :to="`/details/planet/${cardData.originalId}`">
           <img :src="cardData.img" :alt="cardData.name" />
         </router-link>
         </div>
-          <!-- <h4>Model:</h4>
-          <p>{{ cardData.model }}</p>
-          <h4>Crew:</h4>
-          <p>{{ cardData.crew }}</p> -->
           <h3>{{ cardData.name }}</h3>
         <div class="cardButtons">
           <span @click="removeCharacter(cardData.id)" class="material-symbols-rounded">delete</span>
@@ -53,6 +49,10 @@ const handleFavorite = (cardData) => {
   } else {
     store.commit('addFavorite', cardData);
   }
+};
+
+const handleDetail = (cardData) => {
+  emit('detailSuccess', cardData);
 };
 
 const isFavorite = (id) => {
