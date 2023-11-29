@@ -3,7 +3,9 @@
     <div class="cardContainer">
       <div v-for="favorite in favorites" :key="favorite.id" @click="removeFavorite(favorite.id)">
         <CardComponent :character="favorite">
+        <div class="imgcontainer">
           <img :src="favorite.img" :alt="favorite.name" />
+        </div>
           <h3>{{ favorite.name }}</h3>
         </CardComponent>
       </div>

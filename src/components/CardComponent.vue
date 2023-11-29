@@ -15,7 +15,8 @@ const card = {
 <style>
 .card img {
   filter: grayscale(100%);
-  width: 200px;
+  max-width: 300px;
+  min-height: 100px;
   height: auto;
   border-radius: 5px;
 }
@@ -25,11 +26,20 @@ const card = {
   cursor: pointer;
 }
 
+.imgcontainer {
+  height: 430px;
+  display: flex;
+  align-items: center;
+}
+
 .card{
   padding: 10px;
+  height: 520px;
   background-color: yellow;
   border-radius: 5px;
   transition: all 0.05s;
+  display: flex;
+  align-items: center;
 }
 
 .card h3{
