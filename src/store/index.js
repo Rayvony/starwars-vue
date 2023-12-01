@@ -6,7 +6,6 @@ export default createStore({
     starships: [],
     planets: [],
     favorites: [],
-    detail: {},
   },
   mutations: {
     addCharacter(state, character) {
@@ -42,26 +41,19 @@ export default createStore({
         return character.id !== id;
       });
     },
-    setDetail(state, character) {
-      state.detail = character;
-    },
-  },
-  actions: {},
-  getters: {
-    getAllCharacters(state) {
-      return state.characters;
-    },
-    getAllFavorites(state) {
-      return state.favorites;
-    },
-    getAllStarships(state) {
-      return state.starships;
-    },
-    getAllPlanets(state) {
-      return state.planets;
-    },
-    getDetail(state) {
-      return state.detail;
+    getters: {
+      getAllCharacters(state) {
+        return state.characters;
+      },
+      getAllFavorites(state) {
+        return state.favorites;
+      },
+      getAllStarships(state) {
+        return state.starships;
+      },
+      getAllPlanets(state) {
+        return state.planets;
+      },
     },
   },
 });
