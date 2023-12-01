@@ -58,7 +58,7 @@ const isFavorite = (id) => {
 
 const handleDetail = (cardData) => {
   store.commit('setDetail', cardData);
-  router.push(`/details/character/${cardData.originalId}`);
+  router.push(`/details/people/${cardData.originalId}`);
 };
 </script>
 
