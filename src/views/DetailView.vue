@@ -1,23 +1,23 @@
 <template>
-  <div @detailSuccess="handleDetailSuccess" class="detail">
+  <div class="detail">
     <h3>{{ detail.name }}</h3>
     <img :src="detail.img" :alt="detail.name">
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
+import { useStore } from 'vuex';
+
+const store = useStore();
+const character = store.getters.getDetail;
 
 const detail = ref({
-  name: '',
-  img: ''
+  name: character.name,
+  img: character.img,
 });
 
-const handleDetailSuccess = (cardData) => {
-    detail.value = cardData;
-};
 
-onMounted(handleDetailSuccess(cardData))
 </script>
 
 <style scoped>

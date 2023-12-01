@@ -3,9 +3,9 @@
   <div class="cardContainer">
     <div v-for="cardData in store.getters.getAllCharacters" :key="cardData.id">
       <CardComponent>
-        <router-link @click="handleDetail" :to="`/details/character/${cardData.originalId}`">
+        <div @click="handleDetail(cardData)">
           <img :src="cardData.img" :alt="cardData.name" />
-        </router-link>
+        </div>
           <h3>{{ cardData.name }}</h3>
         <div class="cardButtons">
           <span @click="removeCharacter(cardData.id)" class="material-symbols-rounded">delete</span>
@@ -22,9 +22,10 @@
 import CardComponent from '@/components/CardComponent.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const store = useStore();
-const emit = defineEmits(['detailSuccess']);
 
 const handleSearchSuccess = (searchData) => {
   if (isDuplicate(searchData)) return alert('Already added!');
@@ -33,7 +34,7 @@ const handleSearchSuccess = (searchData) => {
 
 const isDuplicate = (searchData) => {
   const characters = store.getters.getAllCharacters;
-  return characters.some(item => item.id === searchData.id);
+  return characters.some(item => item.originalId === searchData.originalId);
 };
 
 const removeCharacter = (id) => {
@@ -56,7 +57,8 @@ const isFavorite = (id) => {
 };
 
 const handleDetail = (cardData) => {
-  emit('detailSuccess', cardData);
+  store.commit('setDetail', cardData);
+  router.push(`/details/character/${cardData.originalId}`);
 };
 </script>
 
