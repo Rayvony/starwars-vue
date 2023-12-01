@@ -11,13 +11,13 @@ export default createStore({
   mutations: {
     addCharacter(state, character) {
       switch (character.type) {
-        case "character":
+        case "people":
           state.characters.push(character);
           break;
-        case "starship":
+        case "starships":
           state.starships.push(character);
           break;
-        case "planet":
+        case "planets":
           state.planets.push(character);
           break;
         default:

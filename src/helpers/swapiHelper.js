@@ -2,38 +2,35 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 const SWAPI_BASE_URL = "https://swapi.dev/api";
+const DEFAULT_IMAGE_URL = "https://starwars-visualguide.com/assets/img/placeholder.jpg";
 
-const getCharacterById = async (id) => {
+const getThingById = async (id, type) => {
   try {
-    const { data } = await axios.get(`${SWAPI_BASE_URL}/people/${id}/`);
-    const img = `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`;
+    let imgType = type;
+    if (type === "people") imgType = "characters";
+
+    const { data } = await axios.get(`${SWAPI_BASE_URL}/${type}/${id}/`);
+
+    const img = `https://starwars-visualguide.com/assets/img/${imgType}/${id}.jpg`;
     const uniqueId = uuidv4();
-    return { ...data, id: uniqueId, originalId: id, img: img, type: "character" };
+
+    // Validate the image URL by making a HEAD request
+    const imageExists = await axios
+      .head(img)
+      .then(() => true)
+      .catch(() => false);
+
+    if (!imageExists) {
+      // Use default image URL if the image doesn't exist or returns an error
+      return { ...data, id: uniqueId, originalId: id, img: DEFAULT_IMAGE_URL, type: type };
+    }
+
+    return { ...data, id: uniqueId, originalId: id, img: img, type: type };
   } catch (error) {
-    console.error("Error fetching character data", error);
+    console.error(`Error fetching ${type} data`, error);
+    const uniqueId = uuidv4();
+    return { id: uniqueId, originalId: id, img: DEFAULT_IMAGE_URL, type: type };
   }
 };
 
-const getShipById = async (id) => {
-  try {
-    const { data } = await axios.get(`${SWAPI_BASE_URL}/starships/${id}/`);
-    const img = `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`;
-    const uniqueId = uuidv4();
-    return { ...data, id: uniqueId, originalId: id, img: img, type: "starship" };
-  } catch (error) {
-    console.error("Error fetching ship data", error);
-  }
-};
-
-const getPlanetById = async (id) => {
-  try {
-    const { data } = await axios.get(`${SWAPI_BASE_URL}/planets/${id}/`);
-    const img = `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`;
-    const uniqueId = uuidv4();
-    return { ...data, id: uniqueId, originalId: id, img: img, type: "planet" };
-  } catch (error) {
-    console.error("Error fetching planet data", error);
-  }
-};
-
-export { getCharacterById, getShipById, getPlanetById };
+export { getThingById };

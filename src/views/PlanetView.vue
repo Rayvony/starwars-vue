@@ -1,5 +1,5 @@
 <template>
-  <SearchBar type="planet" @search-success="handleSearchSuccess"/>
+  <SearchBar type="planets" @search-success="handleSearchSuccess"/>
   <div class="cardContainer">
     <div v-for="cardData in store.getters.getAllPlanets" :key="cardData.id">
       <CardComponent>

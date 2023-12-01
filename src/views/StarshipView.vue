@@ -1,5 +1,5 @@
 <template>
-  <SearchBar type="starship" @search-success="handleSearchSuccess"/>
+  <SearchBar type="starships" @search-success="handleSearchSuccess"/>
   <div class="cardContainer">
     <div v-for="cardData in store.getters.getAllStarships" :key="cardData.id">
       <CardComponent>
