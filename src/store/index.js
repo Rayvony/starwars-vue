@@ -6,6 +6,7 @@ export default createStore({
     starships: [],
     planets: [],
     favorites: [],
+    filters: [],
   },
   mutations: {
     addCharacter(state, character) {
@@ -40,6 +41,29 @@ export default createStore({
       state.favorites = state.favorites.filter((character) => {
         return character.id !== id;
       });
+    },
+    filter(state, type, filter) {
+      switch (type) {
+        case "people":
+          const filteredPeople = state.characters.filter((person) => {
+            return person[filter.filter] === filter.param;
+          });
+          filteredPeople = state.filters;
+        case "starships":
+          const filteredStarships = state.starships.filter((starship) => {
+            return starship[filter.filter] === filter.param;
+          });
+          filteredStarships = state.filters;
+          break;
+        case "planets":
+          const filteredPlanets = state.planets.filter((planet) => {
+            return planet[filter.filter] === filter.param;
+          });
+          filteredPlanets = state.filters;
+          break;
+        default:
+          console.error("Error filtering");
+      }
     },
     getters: {
       getAllCharacters(state) {
